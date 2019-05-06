@@ -15,7 +15,11 @@ Page({
     })
   },
 
-
+  addType() {
+    wx.navigateTo({
+      url: '/pages/book/book',
+    })
+  },
 
 
 

@@ -8,6 +8,11 @@
   </view>
 </view>
 
+<view class="menus" bindtap="addType">
+    <text>我的一级菜单</text>
+    <icon class="iconfont icon-add"></icon>
+</view>
+<view class="sub_order_header no_pay"></view>
 
 <view class="order_title">
   <text>我的员工</text>

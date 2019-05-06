@@ -28,5 +28,6 @@ App({
     header: { 'Cookie': '' },
     timeout: 800,
     sysWidth: wx.getSystemInfoSync().windowWidth,
+    sysHeight: wx.getSystemInfoSync().windowHeight,
   }
 })

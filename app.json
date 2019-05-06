@@ -1,13 +1,13 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/addFood/addFood",
-    "pages/user/user"
+    "pages/user/user",
+    "pages/addFood/addFood"
   ],
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#181E2C",
-    "navigationBarTitleText": "奶茶制作",
+    "navigationBarTitleText": "奶茶制作方法",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
@@ -20,6 +20,12 @@
         "text": "菜单",
         "iconPath": "/images/footer_btn_1.png",
         "selectedIconPath": "/images/footer_btn_1_active.png"
+      },
+      {
+        "pagePath": "pages/addFood/addFood",
+        "text": "",
+        "iconPath": "/images/close_btn.png",
+        "selectedIconPath": "/images/close_btn.png"
       },
       {
         "pagePath": "pages/user/user",

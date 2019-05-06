@@ -46,11 +46,21 @@
   color: #7c7f88;
 }
 
+.menus{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-left: 6px solid #f14333;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding: 20rpx 20rpx 20rpx  20rpx;
+}
+
 .order_title {
   border-left: 6px solid #de3120;
   height: 60rpx;
   line-height: 60rpx;
-  padding-left: 20rpx;
+  padding: 20rpx 20rpx 20rpx 20rpx;
 }
 
 .order_section {
@@ -61,7 +71,7 @@
 
 
 .sub_order_header {
-  height: 74rpx;
+  height: 44rpx;
   line-height: 74rpx;
   padding: 2rpx 60rpx;
   text-align: center;

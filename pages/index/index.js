@@ -5,6 +5,7 @@ Page({
   data: {
     status: 0,
     currentPosition: "order0",
+    sysHeight: app.globalData.sysHeight,
     imgUrls: [
       "/images/1.jpg",
       "/images/1.jpg",
@@ -31,20 +32,9 @@ Page({
     },1000)
   },
 
-  addType(){
-    wx.navigateTo({
-      url: '/pages/book/book',
-    })
-  },
+ 
   
-  /**
-   * 添加食物
-   */
-  addFood() {
-    wx.navigateTo({
-      url: '/pages/addFood/addFood',
-    })
-  },
+ 
 
   previewImages: function (e) {
     console.log(e.currentTarget.dataset.src);

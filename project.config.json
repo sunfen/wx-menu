@@ -15,7 +15,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.6.6",
 	"appid": "wx41b5d7ab33180084",
-	"projectname": "miniprogram-test-1",
+	"projectname": "wx-menu",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

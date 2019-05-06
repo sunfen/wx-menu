@@ -1,23 +1,6 @@
-<view>
-  <swiper class="swiper-menu" indicator-dots="true" autoplay="true" interval="3000" duration="500">
-    <block wx:for="{{imgUrls}}">
-      <swiper-item class="swiper-imgs">
-        <image src="{{item}}" class="slide-image" />
-      </swiper-item>
-    </block>
-  </swiper>
-</view>
-<view class="nav">
-  <view class="search-btn" bindtap="addType">
-    <icon class="iconfont icon-add"></icon> 我的种类
-  </view>
-  <view class="menu-info" bindtap="addFood">
-    <view class="default active"><icon class="iconfont icon-add1"></icon> 添加菜品</view>
-  </view>
-</view>
 <view class="aslide-menu">
 
-  <scroll-view class="aslide-box" scroll-y="true" scroll-x="false">
+  <scroll-view class="aslide-box" style='height:{{sysHeight}}px' scroll-y="true">
     <view class="{{status==0 ? 'in' : ''}}" data-index="0" bindtap="changeMenu">黑泷经典</view>
     <view class="{{status==1 ? 'in' : ''}}" data-index="1" bindtap="changeMenu">东方奶香</view>
     <view class="{{status==2 ? 'in' : ''}}" data-index="2" bindtap="changeMenu">谷力谷奶</view>
@@ -27,8 +10,7 @@
     <view class="{{status==6 ? 'in' : ''}}" data-index="6" bindtap="changeMenu">甜品</view>
   </scroll-view>
 
-  <view class="aslide-content-section">
-    <scroll-view class="aslide-content" scroll-y="false" scroll-x="true" scroll-into-view="{{currentPosition}}" scroll-with-animation="true" bindscrolltolower="scrollBottom">
+    <scroll-view  style='height:{{sysHeight}}px'  class="aslide-content" scroll-into-view="{{currentPosition}}" scroll-y="true" scroll-with-animation="true" bindscrolltolower="scrollBottom">
     
       <view id="order0" class="aslide-item">
         <text class="aslide-item-title">黑泷经典</text>
@@ -38,8 +20,11 @@
           </view>
           <view class="cart-info-container">
             <text class="food-name">黑泷奶绿/珍奶</text>
-            <text class="red">已认证</text>
-            <view class="cart-model"><text>小</text><text>中</text><text>大</text></view>
+            <view class="cart-model">
+              <text>小杯</text>
+              <text>中杯</text>
+              <text>大杯</text>
+            </view>
           </view>
         </view>
         <view class="aslide-item-info">
@@ -48,8 +33,11 @@
           </view>
           <view class="cart-info-container">
             <text class="food-name">椰果奶绿/奶茶</text>
-            <text class="gray">待认证</text>
-            <view class="cart-model"><text>小</text><text>中</text><text>大</text></view>
+            <view class="cart-model">
+              <text>小杯</text>
+              <text>中杯</text>
+              <text>大杯</text>
+            </view>
           </view>
         </view>
         <view class="aslide-item-info">
@@ -58,8 +46,11 @@
           </view>
           <view class="cart-info-container">
             <text class="food-name">布丁奶绿/奶</text>
-            <text class="red">已认证</text>
-            <view class="cart-model"><text>小</text><text>中</text><text>大</text></view>
+            <view class="cart-model">
+              <text>小杯</text>
+              <text>中杯</text>
+              <text>大杯</text>
+            </view>
           </view>
         </view>
       </view>
@@ -72,8 +63,11 @@
           </view>
           <view class="cart-info-container">
             <text class="food-name">炭火观音奶茶</text>
-            <text class="gray">待认证</text>
-            <view class="cart-model"><text>小</text><text>中</text><text>大</text></view>
+            <view class="cart-model">
+              <text>小杯</text>
+              <text>中杯</text>
+              <text>大杯</text>
+            </view>
           </view>
         </view>
         <view class="aslide-item-info">
@@ -82,8 +76,11 @@
           </view>
           <view class="cart-info-container">
             <text class="food-name">红豆布丁烤奶</text>
-            <text class="red">已认证</text>
-            <view class="cart-model"><text>小</text><text>中</text><text>大</text></view>
+            <view class="cart-model">
+              <text>小杯</text>
+              <text>中杯</text>
+              <text>大杯</text>
+            </view>
           </view>
         </view>
         <view class="aslide-item-info">
@@ -92,8 +89,11 @@
           </view>
           <view class="cart-info-container">
             <text class="food-name">北海道布丁奶</text>
-            <text class="red">已认证</text>
-            <view class="cart-model"><text>小</text><text>中</text><text>大</text></view>
+            <view class="cart-model">
+              <text>小杯</text>
+              <text>中杯</text>
+              <text>大杯</text>
+            </view>
           </view>
         </view>
       </view>
@@ -108,8 +108,11 @@
           </view>
           <view class="cart-info-container">
             <text class="food-name">芋见抹茶奶</text>
-            <text class="red">已已认证</text>
-            <view class="cart-model"><text>小</text><text>中</text><text>大</text></view>
+            <view class="cart-model">
+              <text>小杯</text>
+              <text>中杯</text>
+              <text>大杯</text>
+            </view>
           </view>
         </view>
       </view>
@@ -123,8 +126,11 @@
           </view>
           <view class="cart-info-container">
             <text class="food-name">金桔蜜柚</text>
-            <text class="red">已认证</text>
-            <view class="cart-model"><text>小</text><text>中</text><text>大</text></view>
+            <view class="cart-model">
+              <text>小杯</text>
+              <text>中杯</text>
+              <text>大杯</text>
+            </view>
           </view>
         </view>
         <view class="aslide-item-info">
@@ -133,8 +139,11 @@
           </view>
           <view class="cart-info-container">
             <text class="food-name">梨上花开 （雪梨）</text>
-            <text class="red">已认证</text>
-            <view class="cart-model"><text>小</text><text>中</text><text>大</text></view>
+            <view class="cart-model">
+              <text>小杯</text>
+              <text>中杯</text>
+              <text>大杯</text>
+            </view>
           </view>
         </view>
         <view class="aslide-item-info">
@@ -143,8 +152,11 @@
           </view>
           <view class="cart-info-container">
             <text class="food-name">梨不开你 （凤梨）</text>
-            <text class="red">已认证</text>
-           <view class="cart-model"><text>小</text><text>中</text><text>大</text></view>
+            <view class="cart-model">
+              <text>小杯</text>
+              <text>中杯</text>
+              <text>大杯</text>
+            </view>
           </view>
         </view>
         <view class="aslide-item-info">
@@ -153,8 +165,11 @@
           </view>
           <view class="cart-info-container">
             <text class="food-name">金桔柠檬</text>
-            <text class="red">已认证</text>
-            <view class="cart-model"><text>小</text><text>中</text><text>大</text></view>
+            <view class="cart-model">
+              <text>小杯</text>
+              <text>中杯</text>
+              <text>大杯</text>
+            </view>
           </view>
         </view>
       </view>
@@ -197,5 +212,4 @@
       </view>
 
     </scroll-view>
-  </view>
 </view>
