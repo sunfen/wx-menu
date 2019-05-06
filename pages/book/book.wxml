@@ -1,0 +1,2 @@
+<component-book bind:selectone="selectOne"></component-book>
+

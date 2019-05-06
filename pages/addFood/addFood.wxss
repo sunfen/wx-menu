@@ -1,0 +1,97 @@
+scroll-view{
+  font-size: 16px;
+}
+
+.cover{
+  display: flex;
+  margin: 30px;
+  justify-content: center;
+  flex-direction: column;
+  border: 3rpx dotted  rgb(71, 71, 71);
+  height: 200px;
+  border-radius: 30px;
+}
+
+.icon-add2{
+  color: rgb(121, 120, 120);
+}
+
+.name{
+  margin: 30px;
+  padding-bottom: 12rpx;
+  border-bottom: 1rpx solid rgb(146, 146, 146);
+}
+
+
+.type{
+  margin: 30px;
+  padding-bottom: 12rpx;
+  border-bottom: 1rpx solid rgb(146, 146, 146);
+}
+
+.addType{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.type-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.clear{
+  font-weight: 400;
+  color: rgb(240, 1, 21);
+}
+
+
+.addType-add{
+  font-size: 12px;
+  color: rgb(37, 157, 255);
+  margin-top: 10px;
+}
+
+.addStep-add{
+  display: flex;
+  justify-content: flex-end;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgb(37, 157, 255);
+  margin-top: 10px;
+}
+
+.remark{
+  margin: 30px;
+  padding-bottom: 12rpx;
+  border-bottom: 1rpx solid rgb(146, 146, 146);
+}
+
+.step{
+  margin: 30px;
+  padding-bottom: 12rpx;
+  border-bottom: 1rpx solid rgb(146, 146, 146);
+}
+
+
+.remark text{
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+textarea{
+  padding: 5px;
+  font-size: 12px;
+  line-height: 200%;
+  /* height: 300px; */
+  min-height: 30px;
+}
+
+
+.save{
+  margin: 30px;
+}

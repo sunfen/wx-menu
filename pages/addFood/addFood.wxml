@@ -1,0 +1,64 @@
+<scroll-view>
+  
+  <view class="cover">
+    <button class="defalut_btn"><icon class="iconfont icon-add2"></icon>    上传封面</button>
+  </view>
+
+  <!-- 添加菜名 -->
+
+  <view class="name">
+    <input placeholder='添加菜名' maxlength='32'></input>
+  </view>
+
+  <view class="type">
+    <picker range="{{menuTypes}}" value="menuTypeIndex" bindchange="typeChange1">
+    种类: <text>{{menuTypeIndex}}</text>
+    </picker>
+  </view>
+
+  <view class="type">
+    <picker range="{{types}}" value="typeIndex" bindchange="typeChange">
+    杯型: <text>{{typeIndex}}</text>
+    </picker>
+  </view>
+
+  <view class="type">
+    <view class="type-header">
+      <text>添加食材</text>
+      <text class="type-header clear">清空</text>
+    </view>      
+    <view class="addType">
+    <input placeholder='食材:如五花肉' maxlength='32'></input>
+    <input placeholder='用量:如250克' maxlength='32'></input>
+    <icon class="iconfont icon-delete"></icon>
+    </view>
+    <view class="addType-add">再添加一种食材</view>
+  </view>
+
+
+  <view class="step">
+    <view class="type-header">
+      <text>烹饪步骤</text>
+      <text class="type-header clear">清空</text>
+    </view> 
+
+    <view>
+      <text>第1步</text>
+      <view class="cover">
+        <button class="defalut_btn"><icon class="iconfont icon-add2"></icon>    上传步骤图</button>
+
+      </view>
+      <textarea  maxlength='512' placeholder='步骤描述'></textarea>
+    </view>
+    <view class="addStep-add">添加一步</view>
+  </view>
+
+  <view class="remark">
+    <text>小贴士</text>
+    <textarea  maxlength='512' placeholder='添加小提示,最多512个字...'></textarea>
+  </view>
+
+  <view class="save">
+    <button type="primary">保存</button>
+  </view>
+</scroll-view>

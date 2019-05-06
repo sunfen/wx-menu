@@ -1,0 +1,43 @@
+<view class="user_head">
+  <view wx:if="{{userInfo.avatarUrl}}" class="user_img">
+    <image src="{{userInfo.avatarUrl}}"></image>
+    <view class="user_name">{{userInfo.nickName}}</view>
+  </view>
+  <view wx:else class="user_btn">
+    <button  type='primary' size='mini'  open-type='getUserInfo' bindgetuserinfo="bindGetUserInfo" lang="zh_CN">获取昵称信息</button>
+  </view>
+</view>
+
+
+<view class="order_title">
+  <text>我的员工</text>
+</view>
+
+<view class="sub_order_header no_pay"></view>
+
+<view class="order_section">
+  <view class="invitation">
+    <button class="defalut_btn"><icon class="iconfont icon-invitation"></icon> 邀请店员</button>
+  </view>
+  
+  <view class="sub_order_content">
+    <view class="sub_order_img z">
+      <image src="/images/food1.jpg"></image>
+    </view>
+    <view class="sub_order_img_detail z">
+      <text class="order_img_name">SUN_FEN</text>
+      <view class="pay_btn" bindtap="payBtn">移除</view>
+    </view>
+  </view>
+
+  <view class="sub_order_content">
+    <view class="sub_order_img z">
+      <image src="/images/food1.jpg"></image>
+    </view>
+    <view class="sub_order_img_detail z">
+      <text class="order_img_name">SUN_FEN</text>
+      <view class="pay_btn" bindtap="payBtn">移除</view>
+    </view>
+  </view>
+
+</view>
