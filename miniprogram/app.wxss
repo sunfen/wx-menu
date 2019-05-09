@@ -1,5 +1,8 @@
 /**app.wxss**/
-
+page{
+  background: rgb(240, 239, 239);
+  width: 100%;
+}
 .container {
   height: 100%;
   display: flex;
@@ -17,14 +20,13 @@
 
 @font-face {
   font-family: 'iconfont';  /* project id 1175934 */
-  src: url('//at.alicdn.com/t/font_1175934_6lim0cl7kp.eot');
-  src: url('//at.alicdn.com/t/font_1175934_6lim0cl7kp.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1175934_6lim0cl7kp.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1175934_6lim0cl7kp.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1175934_6lim0cl7kp.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1175934_6lim0cl7kp.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1175934_99hmi4ktnxk.eot');
+  src: url('//at.alicdn.com/t/font_1175934_99hmi4ktnxk.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1175934_99hmi4ktnxk.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1175934_99hmi4ktnxk.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1175934_99hmi4ktnxk.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1175934_99hmi4ktnxk.svg#iconfont') format('svg');
 }
-
 
 .iconfont {
   font-family: "iconfont" !important;
@@ -52,10 +54,11 @@
 /* 添加 */
 .icon-add:before { content: "\e626";}
 .icon-add1:before { content: "\e626";}
-.icon-add2:before { content: "\e62d";}
+.icon-add2:before { content: "\e70f";}
+
 .icon-invitation:before { content: "\e633";}
 .icon-invitation1:before { content: "\e600";}
-
+.icon-exchange:before { content: "\e602";}
 .icon-delete:before {content: "\e833";}
 
 ::-webkit-scrollbar{
@@ -63,3 +66,112 @@
     height: 0;
     color: transparent;
 }
+
+
+
+
+
+
+
+/* 悬浮新增 */
+.img-plus-style {  
+  position: fixed;  
+  bottom: 10rpx;  
+  right: 55rpx;
+  z-index: 100;
+}
+
+
+
+/* 容器样式 */
+.modal-mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.5;
+  overflow: hidden;
+  z-index: 9000;
+  color: #fff;
+}
+
+.modal-dialog {
+  width: 540rpx;
+  overflow: hidden;
+  position: fixed;
+  top: 50%;
+  left: 0;
+  z-index: 9999;
+  background: #f9f9f9;
+  margin: -180rpx 105rpx;
+  border-radius: 36rpx;
+}
+
+.modal-title {
+  padding-top: 50rpx;
+  font-size: 36rpx;
+  color: #030303;
+  text-align: center;
+}
+
+.modal-descript {
+  padding-top: 25rpx;
+  font-size: 30rpx;
+  color: #030303;
+  text-align: center;
+}
+
+.modal-content {
+  
+  padding: 50rpx 32rpx;
+}
+
+.modal-input {
+  display: flex;
+  background: #fff;
+  border: 2rpx solid #ddd;
+  border-radius: 4rpx;
+  font-size: 28rpx;
+  margin-bottom: 1rpx;
+}
+
+
+.input {
+  width: 100%;
+  height: 82rpx;
+  font-size: 28rpx;
+  line-height: 28rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  color: #333;
+}
+
+input-holder {
+  color: #666;
+  font-size: 28rpx;
+}
+
+.modal-footer {
+  display: flex;
+  flex-direction: row;
+  height: 86rpx;
+  border-top: 1px solid #dedede;
+  font-size: 34rpx;
+  line-height: 86rpx;
+}
+
+.btn-cancel {
+  width: 50%;
+  color: #666;
+  text-align: center;
+  border-right: 1px solid #dedede;
+}
+
+.btn-confirm {
+  width: 50%;
+  color: #ec5300;
+  text-align: center;
+}
+

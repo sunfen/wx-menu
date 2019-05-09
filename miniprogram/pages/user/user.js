@@ -4,20 +4,29 @@ var app = getApp();
 Page({
   data: {
     userInfo: {},
-    timeCounter: null
+    timeCounter: null,
+    showModalName: false,
   },
 
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     var that = this;
+    var stores = wx.getStorageSync("stores");
     that.setData({
-      userInfo: app.globalData.userInfo
+      userInfo: app.globalData.userInfo,
+      stores: stores
     })
   },
 
-  addType() {
+  viewType() {
     wx.navigateTo({
       url: '/pages/book/book',
+    })
+  },
+
+  viewStore(){
+    wx.navigateTo({
+      url: '/pages/stores/stores',
     })
   },
 
@@ -38,29 +47,6 @@ Page({
               [avatarUrl]: e.detail.userInfo.avatarUrl,
               [nickName]: e.detail.userInfo.nickName
             })
-            // wx.request({
-            //   header: header,
-            //   url: getApp().globalData.urlPath + 'login',
-            //   method: 'POST',
-            //   header: header,
-            //   data: {
-            //     username: e.detail.userInfo.nickName,
-            //     avatarUrl: e.detail.userInfo.avatarUrl,
-            //     openid: getApp().globalData.openid,
-            //     password: getApp().globalData.openid
-            //   },
-            //   success: function (res) {
-            //     //从数据库获取用户信息
-            //     if (res.data.code == "200") {
-            //       getApp().globalData.header.Cookie = 'JSESSIONID=' + res.data.t.session;
-            //     } else {
-            //       common.loginFail();
-            //     }
-            //   },
-            //   fail: function (res) {
-            //     common.loginFail();
-            //   }
-            // })
           }
         }
       })

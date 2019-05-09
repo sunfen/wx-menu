@@ -26,14 +26,6 @@
   margin: 38rpx auto 0 auto;
 }
 
-.z {
-  float: left;
-}
-
-.y {
-  float: right;
-}
-
 .user_head {
   padding-top: 1px;
   height: 300rpx;
@@ -46,6 +38,22 @@
   color: #7c7f88;
 }
 
+.z {
+  float: left;
+}
+
+.y {
+  float: right;
+}
+
+
+.addStore{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-right: 10px;
+}
+
 .menus{
   display: flex;
   flex-direction: row;
@@ -56,11 +64,20 @@
   padding: 20rpx 20rpx 20rpx  20rpx;
 }
 
+.border{
+  border-bottom: 1rpx solid rgb(204, 203, 203);
+}
+
 .order_title {
   border-left: 6px solid #de3120;
   height: 60rpx;
   line-height: 60rpx;
   padding: 20rpx 20rpx 20rpx 20rpx;
+}
+
+.link{
+  font-size: 20px;
+  color:rgb(14, 158, 241);
 }
 
 .order_section {
@@ -132,10 +149,6 @@
   font-size: 32rpx;
 }
 
-.m30 {
-  margin: 10rpx 0;
-  font-weight: normal;
-}
 
 .sub_order_img_detail{
   display: flex;
@@ -153,4 +166,8 @@
 .icon-invitation{
   color: rgb(10, 221, 3);
   font-weight: 600;
+}
+
+.icon-exchange{
+  color:rgb(14, 158, 241);
 }

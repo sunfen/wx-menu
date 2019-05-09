@@ -8,9 +8,21 @@
   </view>
 </view>
 
-<view class="menus" bindtap="addType">
+<view class="menus border">
+    <text>我的店： {{store.name ? store.name  : '无'}}</text>
+    <picker range="{{stores}}" range-key="id" value="{{storeIndex}}" bindchange='changeStore'>
+      <icon class="iconfont icon-exchange">切换</icon>
+    </picker>
+</view>
+<view class="addStore" bindtap='viewStore'>
+  <text class="link">查看</text>
+</view>
+
+<view class="sub_order_header no_pay"></view>
+
+<view class="menus" bindtap="viewType">
     <text>我的一级菜单</text>
-    <icon class="iconfont icon-add"></icon>
+    <text class="link">查看</text>
 </view>
 <view class="sub_order_header no_pay"></view>
 
@@ -49,3 +61,19 @@
 
 
 <component-footer current="2"></component-footer>
+
+
+<!--弹窗 添加收款人 -->
+<view class="modal-mask" bindtap="hideModal"  catchtouchmove="preventTouchMove" wx:if="{{showModalName}}"></view>
+<view class="modal-dialog" wx:if="{{showModalName}}">
+      <view class="modal-title">店名</view>
+      <view class="modal-content">
+        <view class="modal-input">
+          <input placeholder-class="input-holder" type="text" maxlength="32" class="input" placeholder="请输入店名" id="name"   bindinput="inputValue"></input>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <view class="btn-cancel" bindtap="closeModal" data-status="cancel">取消</view>
+        <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
+      </view>
+    </view>

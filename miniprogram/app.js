@@ -17,7 +17,7 @@ App({
     const updateManager = wx.getUpdateManager();
 
     updateManager.onCheckForUpdate(function (res) {
-        // 请求完新版本信息的回调
+      // 请求完新版本信息的回调
     })
 
     updateManager.onUpdateReady(function () {
@@ -32,6 +32,31 @@ App({
         showCancel: false
       })
     })
+
+    wx.cloud.init();
+    const db = wx.cloud.database();
+
+    wx.cloud.callFunction({
+      // 需调用的云函数名
+      name: 'login',
+      // 成功回调
+      complete : res => {
+        console.log(res);
+        db.collection("stores").where({
+          _openid: res.result.openid
+        }).get({
+          success: result => {
+            console.log(result)
+            that.globalData.stores = result.data;
+            wx.setStorageSync("stores", result.data);
+          }, fail: err => {
+            console.log(err)
+          }
+        })
+      }
+    })
+
+
   },
 
   
@@ -46,14 +71,7 @@ App({
   
   globalData:{
     userInfo:null,
-    //urlPath: "http://39.106.157.46:8080/",
-    urlPath: "https://www.art-sculpture.cn/",
-    //urlPath: "http://localhost:8081/",
-    //urlPath: "http://192.168.1.105:8081/",
-    openid: '',
-    isLogin: false,
-    header: { 'Cookie': '' },
-    timeout: 800,
+    stores:[],
     sysWidth: wx.getSystemInfoSync().windowWidth,
     sysHeight: wx.getSystemInfoSync().windowHeight,
   },

@@ -1,7 +1,9 @@
 {
+  "cloud": true,
   "pages": [
-    "pages/index/index",
+    "pages/stores/stores",
     "pages/user/user",
+    "pages/index/index",
     "pages/addFood/addFood"
   ],
   "window": {
