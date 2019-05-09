@@ -213,3 +213,6 @@
 
     </scroll-view>
 </view>
+
+
+<component-footer current="0"></component-footer>

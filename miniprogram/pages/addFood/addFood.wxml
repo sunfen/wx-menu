@@ -62,3 +62,6 @@
     <button type="primary">保存</button>
   </view>
 </scroll-view>
+
+
+<component-footer current="1"></component-footer>

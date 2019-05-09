@@ -1,0 +1,111 @@
+@font-face {
+  font-family: 'iconfont';  /* project id 1175934 */
+  src: url('//at.alicdn.com/t/font_1175934_3lbtjclq6jk.eot');
+  src: url('//at.alicdn.com/t/font_1175934_3lbtjclq6jk.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1175934_3lbtjclq6jk.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1175934_3lbtjclq6jk.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1175934_3lbtjclq6jk.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1175934_3lbtjclq6jk.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height:60rpx;
+  font-size:36rpx;
+  line-height: 80rpx;
+  color: rgb(198, 202, 216);
+}
+
+
+
+/* 清楚按钮的默认样式  */
+.defalut_btn{
+  background: transparent;
+  border:none;
+  overflow: visible;
+  padding-left:0;
+  padding-right:0;
+  margin-left:0;
+  margin-right:0;
+  border-radius:0;
+}
+.defalut_btn:after{
+  display: none;
+}
+.text-primary{
+  color:#00a2e9;
+}
+
+/*首页*/
+.icon-home:before { content: "\e611"; }
+/*我的*/
+.icon-my:before { content: "\e601"; }
+
+
+page{font-size:26rpx;color:#666;}
+.flex{display:-webkit-flex;display: flex;width:100%;}
+
+
+/*  底部悬浮导航  */
+.fix_nav_wp{
+  height:110rpx;
+  position: fixed;
+  left:0;
+  bottom:0;
+  background: #fff;
+  /* background:rgb(3, 2, 46); */
+  border-top:1rpx solid #e5e5e5;
+  z-index: 10000
+}
+
+.fix_nav_wp .nav_link{flex:1;}
+
+.fix_nav_wp button{
+  height:110rpx;
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  padding:0;
+  font-size:22rpx;
+  flex-direction: column;
+  color:#999;
+  position: relative;
+}
+
+.fix_nav_wp .tip_tip{
+  position: absolute;
+  right:25rpx;
+  top:5rpx;
+  min-width:28rpx;
+  line-height:32rpx;
+  height: 32rpx;
+  padding:0 8rpx;
+  color:#fff;
+  background:#f00;
+  border-radius:50em;
+  border:1rpx solid #fff;
+}
+
+
+.fix_nav_wp .nav_link.current .txt{color:#fff;}
+.txt{height:50rpx;line-height:40rpx;color:rgb(198, 202, 216);}
+.fix_nav_wp .nav_link .plus_wp{width:120rpx;height:120rpx;margin-top: -45rpx;}
+.fix_nav_wp .nav_link image{width:120rpx;height:120rpx;}
+.fix_nav_wp .nav_link .del_ico{display: block;}
+.fix_nav_wp .nav_link .cur_ico{display: none;}
+.fix_nav_wp .nav_link.current .del_ico{display: none;}
+.fix_nav_wp .nav_link.current .cur_ico{display: block;color:#fff;}
+.fix_nav_wp .nav_link .txt_fb{line-height: 8rpx}
+.fix_nav_wp .nav_link .mp_ico{font-size: 36rpx;line-height: 80rpx}
+.fix_nav_wp .nav_link .xiaox_ico{font-size: 36rpx;line-height: 70rpx;}
+.fix_nav_wp .nav_link .my_ico{font-size: 36rpx;}
+.on_cor, icon-home .on_cor, icon-my .on_cor{
+  color: rgb(19, 158, 250);
+  font-weight: 600;
+  font-size: 16px
+}
+
+

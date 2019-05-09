@@ -1,0 +1,25 @@
+<view class="flex fix_nav_wp">
+  <view class="nav_link" bindtap='goHome'>
+    <button class="defalut_btn {{current == 0?'on_cor':''}}">
+      <icon class="iconfont icon-home {{current == 0?'on_cor':''}}"></icon>     
+      <text class="txt {{current == 0?'on_cor':''}}">制作</text>
+    </button>
+  </view>
+
+
+  <view class="nav_link">
+    <button class="defalut_btn {{current==1?'on_cor':''}}" bindtap='goAddFood'>
+      <view class="plus_wp">
+        <image src='/images/plus_ico.png' class="plus_ico" />
+      </view>
+      <text class="txt txt_fb  {{current == 1?'on_cor':''}}">新增</text>
+    </button>
+  </view>
+
+  <view class="nav_link">
+    <button class="defalut_btn {{current==2?'on_cor':''}}" bindtap='goMy'>
+      <icon class="iconfont icon-my {{current == 2?'on_cor':''}}"></icon>
+      <text class="txt {{current == 2?'on_cor':''}}">我的</text>
+    </button>
+  </view>
+</view>

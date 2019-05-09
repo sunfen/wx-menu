@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/user/user",
+    "pages/addFood/addFood"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#181E2C",
+    "navigationBarTitleText": "奶茶制作方法",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#000"
+  },
+  "sitemapLocation": "sitemap.json"
+}

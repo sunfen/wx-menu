@@ -46,3 +46,6 @@
   </view>
 
 </view>
+
+
+<component-footer current="2"></component-footer>
