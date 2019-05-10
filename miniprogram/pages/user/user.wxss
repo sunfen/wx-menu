@@ -64,9 +64,6 @@
   padding: 20rpx 20rpx 20rpx  20rpx;
 }
 
-.border{
-  border-bottom: 1rpx solid rgb(204, 203, 203);
-}
 
 .order_title {
   border-left: 6px solid #de3120;
@@ -83,6 +80,7 @@
 .order_section {
   margin-top: 32rpx;
   padding-bottom: 135rpx;
+  margin-bottom: 32px;
 }
 
 
@@ -97,6 +95,7 @@
 
 .no_pay {
   background-color: #fed9c2;
+  border-bottom: 1rpx solid rgb(204, 203, 203);
 }
 
 .payed {

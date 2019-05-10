@@ -1,10 +1,11 @@
 {
   "cloud": true,
   "pages": [
-    "pages/stores/stores",
+    "pages/addFood/addFood",
     "pages/user/user",
-    "pages/index/index",
-    "pages/addFood/addFood"
+    "pages/menu/menu",
+    "pages/stores/stores",
+    "pages/index/index"
   ],
   "window": {
     "backgroundTextStyle": "dark",

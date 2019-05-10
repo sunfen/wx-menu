@@ -4,15 +4,8 @@ App({
     //调用API从本地缓存中获取数据
     var that=this;  
     that.getUserInfo(function(userInfo){ 
-         that.globalData.userInfo=userInfo
-         //console.log(that.globalData.userInfo);
+      that.globalData.userInfo=userInfo
     }); 
-
-
-    wx.showShareMenu({
-      withShareTicket: true
-    })
-
 
     const updateManager = wx.getUpdateManager();
 
@@ -33,7 +26,9 @@ App({
       })
     })
 
-    wx.cloud.init();
+    wx.cloud.init({
+      env: 'menu-uhbvh'
+    })
     const db = wx.cloud.database();
 
     wx.cloud.callFunction({
@@ -41,12 +36,32 @@ App({
       name: 'login',
       // 成功回调
       complete : res => {
-        console.log(res);
+        wx.setStorageSync("openid", res.result.openid);
+
+        db.collection("users").where({
+          _openid: res.result.openid
+        }).get({
+          success: result => {
+            if(result.data.length == 0 ){
+              db.collection("users").add({
+                data: {
+                  openid: res.result.openid
+                }, success: res => {
+                  wx.setStorageSync("userid", res._id);
+                }
+              })
+            }else{
+              wx.setStorageSync("userid", result.data[0]._id);
+            }
+          }, fail: err => {
+            console.log(err)
+          }
+        })
+
         db.collection("stores").where({
           _openid: res.result.openid
         }).get({
           success: result => {
-            console.log(result)
             that.globalData.stores = result.data;
             wx.setStorageSync("stores", result.data);
           }, fail: err => {
@@ -72,6 +87,8 @@ App({
   globalData:{
     userInfo:null,
     stores:[],
+    store: {},
+    openid: null,
     sysWidth: wx.getSystemInfoSync().windowWidth,
     sysHeight: wx.getSystemInfoSync().windowHeight,
   },

@@ -1,0 +1,29 @@
+<!-- 左侧列表内容部分 -->
+  <scroll-view class="content" enable-back-to-top scroll-y="true" scroll-with-animation="true" bindscroll="onPageScroll"> 
+    
+    <view class="item" wx:for="{{results}}" wx:if="{{results.length > 0}}" wx:for-item="result" wx:key="{{result._id}}"  data-menu='{{result}}' bindtap="selectOne"> 
+      <view>{{index + 1}}.{{result.name}}</view> 
+    </view> 
+  </scroll-view> 
+
+
+  
+  <button class="defalut_btn img-plus-style"  bindtap="add">
+    <icon class="iconfont icon-add"></icon>
+  </button>
+  
+  
+  <!--弹窗 添加地点 -->
+  <view class="modal-mask" bindtap="hideModal"  catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+    <view class="modal-dialog" wx:if="{{showModal}}">
+      <view class="modal-title">一级菜单名称</view>
+      <view class="modal-content">
+        <view class="modal-input">
+          <input placeholder-class="input-holder" type="text" maxlength='11' class="input" placeholder="请输入一级菜单名称" id="menu.name"  value="{{menu.name}}" bindinput="inputValue"></input>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <view class="btn-cancel" bindtap="closeModal" data-status="cancel">取消</view>
+        <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
+    </view>
+  </view>

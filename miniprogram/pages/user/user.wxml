@@ -8,19 +8,18 @@
   </view>
 </view>
 
-<view class="menus border">
+<view class="menus ">
     <text>我的店： {{store.name ? store.name  : '无'}}</text>
-    <picker range="{{stores}}" range-key="id" value="{{storeIndex}}" bindchange='changeStore'>
+    <picker range="{{stores}}" range-key="name" value="{{storeIndex}}" bindchange='changeStore'>
       <icon class="iconfont icon-exchange">切换</icon>
     </picker>
 </view>
 <view class="addStore" bindtap='viewStore'>
   <text class="link">查看</text>
 </view>
-
 <view class="sub_order_header no_pay"></view>
 
-<view class="menus" bindtap="viewType">
+<view class="menus" bindtap="viewMenu">
     <text>我的一级菜单</text>
     <text class="link">查看</text>
 </view>
@@ -30,11 +29,11 @@
   <text>我的员工</text>
 </view>
 
-<view class="sub_order_header no_pay"></view>
 
 <view class="order_section">
-  <view class="invitation">
-    <button class="defalut_btn"><icon class="iconfont icon-invitation"></icon> 邀请店员</button>
+  <view class="invitation"  >
+    <button class="defalut_btn"  open-type="share">
+      <icon class="iconfont icon-invitation"></icon> 邀请店员</button>
   </view>
   
   <view class="sub_order_content">
@@ -43,17 +42,7 @@
     </view>
     <view class="sub_order_img_detail z">
       <text class="order_img_name">SUN_FEN</text>
-      <view class="pay_btn" bindtap="payBtn">移除</view>
-    </view>
-  </view>
-
-  <view class="sub_order_content">
-    <view class="sub_order_img z">
-      <image src="/images/food1.jpg"></image>
-    </view>
-    <view class="sub_order_img_detail z">
-      <text class="order_img_name">SUN_FEN</text>
-      <view class="pay_btn" bindtap="payBtn">移除</view>
+      <view class="pay_btn" bindtap="onDelMembers">移除</view>
     </view>
   </view>
 

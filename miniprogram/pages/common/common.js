@@ -1,64 +1,6 @@
 const app = getApp();
 var header = app.globalData.header;
 
-function submitFormId(formId) {
-  var data = JSON.stringify({ 'openId': app.globalData.openid, 'formId': formId });
-   // 发送到服务器
-  wx.request({
-    url: getApp().globalData.urlPath + 'form',
-    method: 'POST',
-    header: header,
-    data: data
-  });
-}
-
-module.exports.submitFormId = submitFormId;
-
-function checkLogin() {
-  var that = this;
-  wx.checkSession({
-    fail() {
-      // session_key 已经失效，需要重新执行登录流程
-      login() // 重新登录
-    }
-  })
-}
-
-
-module.exports.checkLogin = checkLogin;
-
-
-function login() {
-  var that = this;
-  var header = app.globalData.header;
-  //获取openId
-  wx.login({
-    timeout: 300,
-    success: function (res) {
-      if (res.code) {
-        wx.request({
-          url: getApp().globalData.urlPath + 'login/session/' + res.code,
-          method: 'GET',
-          header: header,
-          success: function (res) {
-            if (res.data.code == "200") {
-              //从数据库获取用户信息
-              getApp().globalData.header.Cookie = 'JSESSIONID=' + res.data.t.session;
-              getApp().globalData.openid = res.data.t.openid;
-              getApp().globalData.userInfo.avatarUrl = res.data.t.avatarUrl;
-              getApp().globalData.userInfo.nickName = res.data.t.name;
-            }
-            
-          }
-        })
-      }
-    }
-  })
-}
-
-module.exports.login = login;
-
-
 function errorWarn(content) {
   wx.showModal({
     content: content,

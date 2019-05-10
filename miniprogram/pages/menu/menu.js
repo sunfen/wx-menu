@@ -6,11 +6,16 @@ Page({
   data: {
     results: [],
     showModal: false,
-    store: null
+    store: null,
+    menu:{}
   },
 
   onLoad(){
     var that = this;
+    var store = wx.getStorageSync("store");
+    that.setData({store: store});
+    var openid = wx.getStorageSync("openid");
+    that.setData({ openid: openid });
     that.init();
   },
 
@@ -19,13 +24,13 @@ Page({
       title: '加载中',
     })
     var that = this;
-    db.collection("stores").where({
-      _openid: app.globalData.openid
+    db.collection("menus").where({
+      _openid: that.data.openid,
+      store_id: that.data.store._id
     }).get({
       success: result => {
-        console.log(result)
         that.setData({ results: result.data });
-        wx.setStorageSync("stores", result.data);
+        wx.setStorageSync("menus", result.data);
         wx.hideLoading();
       }, fail: err => {
         console.log(err);
@@ -40,9 +45,9 @@ Page({
       itemList:['编辑', '删除'],
       success(res) {
         if (res.tapIndex == 0){
-          that.edit(e.currentTarget.dataset.store);
+          that.edit(e.currentTarget.dataset.menu);
         }else  if (res.tapIndex == 1) {
-          that.onDel(e.currentTarget.dataset.store);
+          that.onDel(e.currentTarget.dataset.menu);
         }
       }
     })
@@ -53,7 +58,7 @@ Page({
    */
   edit(item) {
     var that = this;
-    that.setData({ showModal: true, store: item});
+    that.setData({ showModal: true, menu: item});
   },
 
   /**
@@ -61,7 +66,7 @@ Page({
    */
   add(){
     var that = this;
-    that.setData({ showModal: true, store: {} });
+    that.setData({ showModal: true, menu: {} });
   },
 
 
@@ -90,8 +95,8 @@ Page({
   onConfirm: function (e) {
     var that = this;
   
-    if (that.data.store.name == "" || that.data.store.name == undefined) {
-      common.showAlertToast("请填写店名！");
+    if (that.data.menu.name == "" || that.data.menu.name == undefined) {
+      common.showAlertToast("请填写名称！");
       return;
     }
 
@@ -99,7 +104,7 @@ Page({
       showModal: false
     })
 
-    if (that.data.store._id){
+    if (that.data.menu._id){
       that.onUpdate();
     }else{
       that.onCreate();
@@ -108,10 +113,10 @@ Page({
 
   onCreate(){
     var that = this;
-    db.collection("stores").add({
+    db.collection("menus").add({
       data: {
-        name: that.data.store.name,
-        is_owner: true,
+        store_id:that.data.store._id,
+        name: that.data.menu.name,
       }, success: res => {
         wx.showToast({
           title: '新增成功！',
@@ -120,14 +125,13 @@ Page({
             that.init();
           }
         })
-        that.setData({store: {}});
+        that.setData({ menu: {}});
       }, fail: err => {
-        that.setData({ store: {} });
-        console.log(err.errCode);
-        if (err.errCode == -502001){
-          
-          common.showAlertToast("该店名已经存在，请重新命名！");  
-        }else{
+        that.setData({ menu: {} });
+        if (err.errCode == -502001) {
+
+          common.showAlertToast("该店名已经存在，请重新命名！");
+        } else {
 
           common.showAlertToast("数据错误，请重试！");
         }
@@ -139,9 +143,9 @@ Page({
 
   onUpdate() {
     var that = this;
-    db.collection("stores").doc(that.data.store._id).update({
+    db.collection("menus").doc(that.data.menu._id).update({
       data: {
-        name: that.data.store.name,
+        name: that.data.menu.name,
       }, success: res => {
         wx.showToast({
           title: '更新成功！',
@@ -150,12 +154,12 @@ Page({
             that.init();
           }
         })
-        that.setData({ store: {} });
+        that.setData({ menu: {} });
       }, fail: err => {
-        that.setData({ store: {} });
+        that.setData({ menu: {} });
         if (err.errCode == -502001) {
 
-          common.showAlertToast("该店名已经存在，请重新命名！");
+          common.showAlertToast("该分类已经存在，请重新命名！");
         } else {
 
           common.showAlertToast("数据错误，请重试！");
@@ -170,21 +174,7 @@ Page({
   onDel(item) {
     var that = this;
     console.log(item);
-    wx.showModal({
-      title: '提示',
-      content: '确定删除吗？菜单以及店内成员将一并删除!',
-      success(res) {
-        if (res.confirm) {
-          that.deleteStore(item);
-        } else if (res.cancel) {
-        }
-      }
-    })
-  },
-
-  deleteStore(item){
-    var that = this;
-    db.collection("stores").doc(item._id).remove({
+    db.collection("menus").doc(item._id).remove({
       success: res => {
         wx.showToast({
           title: '成功删除！',
@@ -193,47 +183,14 @@ Page({
             that.init();
           }
         })
-        
-        db.collection("menus").where({
-          _openid: that.data.openid,
-          store_id: item._id
-        }).get({
-          success: result => {
-
-            for(var i = 0; i < result.data.length; i ++){
-              db.collection("menus").doc(result.data[i]._id).remove({
-                success: res => {
-
-                }, fail: err => {
-                  common.showAlertToast('删除失败');
-                }
-              })
-            }
-          }
-        })
-        
-
-        db.collection("stores").where({
-          _id: item._id
-        }).get({
-          success: result => {
-
-            for (var i = 0; i < result.data.length; i++) {
-              db.collection("stores").doc(result.data[i]._id).remove({
-                success: res => {
-                }, fail: err => {
-                  common.showAlertToast('删除失败');
-                }
-              })
-            }
-          }
-        })
-
       }, fail: err => {
         common.showAlertToast('删除失败');
       }
     })
+
+
   },
+
 
   /**
     * 弹出框蒙层截断touchmove事件
