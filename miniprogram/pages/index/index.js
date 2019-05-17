@@ -34,7 +34,11 @@ Page({
 
  
   
- 
+  viewFood(){
+    wx.navigateTo({
+      url: '/pages/viewFood/viewFood',
+    })
+  },
 
   previewImages: function (e) {
     console.log(e.currentTarget.dataset.src);

@@ -1,6 +1,7 @@
 {
   "cloud": true,
   "pages": [
+    "pages/viewFood/viewFood",
     "pages/addFood/addFood",
     "pages/user/user",
     "pages/menu/menu",
