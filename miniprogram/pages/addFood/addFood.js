@@ -1,6 +1,10 @@
 // pages/user/user.js
 //获取应用实例
 var app = getApp();
+var common = require('/../../pages/common/common.js');
+const db = wx.cloud.database();
+
+
 Page({
   data: {
     sysWidth: app.globalData.sysWidth,
@@ -91,8 +95,21 @@ Page({
       count: 1,
       success(res) {
         console.log(res);
-        that.setData({
-          cover: res
+        
+        var date = new Date();
+        console.log(date);
+        that.setData({ cover: res })
+
+        wx.cloud.uploadFile({
+          cloudPath: '',
+          filePath: res.tempFilePaths[0], // 文件路径
+          success: res => {
+            // get resource ID
+            console.log(res.fileID)
+          },
+          fail: err => {
+            // handle error
+          }
         })
       },
       fail(res) {
