@@ -1,19 +1,22 @@
 {
   "cloud": true,
   "pages": [
-    "pages/viewFood/viewFood",
-    "pages/addFood/addFood",
+    "pages/index/index",
+    "pages/submenu/submenu",
     "pages/user/user",
+    "pages/addFood/addFood",
+    "pages/viewFood/viewFood",
     "pages/menu/menu",
-    "pages/stores/stores",
-    "pages/index/index"
+    "pages/subsubmenu/subsubmenu",
+    "pages/stores/stores"
   ],
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#181E2C",
     "navigationBarTitleText": "奶茶制作方法",
     "navigationBarTextStyle": "white",
-    "backgroundColor": "#000"
+    "backgroundColor": "#000",
+    "navigationStyle": "custom"
   },
   "sitemapLocation": "sitemap.json"
 }

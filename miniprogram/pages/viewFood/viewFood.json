@@ -1,6 +1,6 @@
 {
-  "usingComponents": {
-    "component-footer": "/pages/component/footer/footer"
-  }
+    "usingComponents": {
+      "component-topnav": "/pages/component/topnav/topnav"
+    }
 
 }

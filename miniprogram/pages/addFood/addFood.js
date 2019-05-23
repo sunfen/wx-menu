@@ -10,8 +10,7 @@ Page({
     sysWidth: app.globalData.sysWidth,
     types:['大杯', '中杯', '小杯'],
     typeIndex: '大杯',
-    menuTypes: ['黑泷经典', '东方奶香', '谷力姑奶'],
-    menuTypeIndex: '黑泷经典',
+    menuIndex: 0,
     foods:[{}],
     steps: [{ images: []}]
   },
@@ -19,9 +18,20 @@ Page({
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     var that = this;
+    var menus = wx.getStorageSync("menus");
+    console.log(menus);
+    if (menus == undefined || menus == null || !menus){
+      menus = [];
+      this.setData({ menusReply: true })
+    }
+    menus.push({name: "手动输入"});
+    that.setData({ menus : menus});
   },
 
 
+  goback() {
+    wx.navigateBack({ delta: 1 })
+  },
 
   /**
    * 输入框输入事件
@@ -32,6 +42,7 @@ Page({
     that.setData({
       [name]: e.detail.value
     })
+    console.log(that.data);
   },
 
   addFoods(){
@@ -89,35 +100,7 @@ Page({
     })
   },
 
-  addCover(e){
-    var that = this;
-    wx.chooseImage({
-      count: 1,
-      success(res) {
-        console.log(res);
-        
-        var date = new Date();
-        console.log(date);
-        that.setData({ cover: res })
 
-        wx.cloud.uploadFile({
-          cloudPath: '',
-          filePath: res.tempFilePaths[0], // 文件路径
-          success: res => {
-            // get resource ID
-            console.log(res.fileID)
-          },
-          fail: err => {
-            // handle error
-          }
-        })
-      },
-      fail(res) {
-        that.setData({ logo: null })
-        showToast.showToastFail('未选择');
-      }
-    })
-  },
 
   
   typeChange(e) {
@@ -125,6 +108,10 @@ Page({
     this.setData({ menuTypeIndex: this.data.types[e.detail.value] });
   },
 
+  menuTypeChange(e) {
+    console.log(e.detail.value);
+    this.setData({ menuIndex: this.data.menus[e.detail.value] });
+  },
 
 
   touchstart(e) {
@@ -179,5 +166,22 @@ Page({
       })
     }
   },
+
+  save(){
+    wx.showLoading({
+      title: '上传中...',
+    })
+    Promise.all(res.tempFilePaths.map((item) => {
+      return wx.cloud.uploadFile({
+        cloudPath: 'uploadImages/' + Date.now() + item.match(/\.[^.]+?$/)[0], // 文件名称 
+        filePath: item,
+      })
+    })).then((resCloud) => {
+      wx.hideLoading()
+      console.log(resCloud);
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
 
 })

@@ -1,0 +1,19 @@
+/* pages/list/list.wxss */
+page{
+  height: 100%;
+} 
+
+.item{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  background: #fff;
+  padding: 10px;
+}
+
+.icon-add {
+  font-size:56px;
+  color:  #F6ACAC;
+}

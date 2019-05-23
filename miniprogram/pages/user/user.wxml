@@ -1,3 +1,5 @@
+<component-topnav></component-topnav> 
+
 <view class="user_head">
   <view wx:if="{{userInfo.avatarUrl}}" class="user_img">
     <image src="{{userInfo.avatarUrl}}"></image>
@@ -20,7 +22,7 @@
 <view class="sub_order_header no_pay"></view>
 
 <view class="menus" bindtap="viewMenu">
-    <text>我的一级菜单</text>
+    <text>我的菜单</text>
     <text class="link">查看</text>
 </view>
 <view class="sub_order_header no_pay"></view>

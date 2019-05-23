@@ -26,6 +26,25 @@ App({
       })
     })
 
+    wx.getSystemInfo({
+      success: function (res) {
+        that.globalData.platform = res.platform
+        let totalTopHeight = 68
+        if (res.model.indexOf('iPhone X') !== -1) {
+          totalTopHeight = 88
+        } else if (res.model.indexOf('iPhone') !== -1) {
+          totalTopHeight = 64
+        }
+        that.globalData.statusBarHeight = res.statusBarHeight
+        that.globalData.titleBarHeight = totalTopHeight - res.statusBarHeight
+      },
+      failure() {
+        that.globalData.statusBarHeight = 0
+        that.globalData.titleBarHeight = 0
+      }
+    }),
+
+
     wx.cloud.init({
       env: 'menu-uhbvh'
     })
@@ -37,15 +56,15 @@ App({
       // 成功回调
       complete : res => {
         wx.setStorageSync("openid", res.result.openid);
-
+        that.globalData.openid = res.result.openid;
         db.collection("users").where({
-          _openid: res.result.openid
+          _openid: that.globalData.openid
         }).get({
           success: result => {
             if(result.data.length == 0 ){
               db.collection("users").add({
                 data: {
-                  openid: res.result.openid
+                  openid: that.globalData.openid
                 }, success: res => {
                   wx.setStorageSync("userid", res._id);
                 }
@@ -57,17 +76,39 @@ App({
             console.log(err)
           }
         })
+        var store = wx.getStorageSync("store");
+        if(!store){
+          db.collection("stores").where({
+            _openid: that.globalData.openid
+          }).get({
+            success: result => {
+              that.globalData.stores = result.data;
+              wx.setStorageSync("stores", result.data);
+              if(result.data.length > 0){
+                wx.setStorageSync({ "store": result.data[0] });
+              }
+            }, fail: err => {
+              console.log(err)
+            }
+          })
 
-        db.collection("stores").where({
-          _openid: res.result.openid
-        }).get({
-          success: result => {
-            that.globalData.stores = result.data;
-            wx.setStorageSync("stores", result.data);
-          }, fail: err => {
-            console.log(err)
+        }else{
+          var menus = wx.getStorageSync("menus");
+          if (!menus) {
+            db.collection("menus").where({
+              _openid: that.globalData.openid,
+              store_id: store._id
+            }).get({
+              success: result => {
+                wx.setStorageSync("menus", result.data);
+                wx.hideLoading();
+              }, fail: err => {
+                console.log(err);
+                wx.hideLoading();
+              }
+            })
           }
-        })
+        }
       }
     })
 

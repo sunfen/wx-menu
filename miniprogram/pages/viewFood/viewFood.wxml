@@ -1,3 +1,4 @@
+<component-topnav inner-title="查看制作方法" is-show-back="true" bind:goback="goback"></component-topnav>
 <scroll-view>
   
   <view class="cover" style='width:{{sysWidth/4*3}}px'>

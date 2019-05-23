@@ -1,0 +1,41 @@
+<component-topnav inner-title="二级菜单管理" is-show-back="true" bind:goback="goback"></component-topnav>
+<!-- 左侧列表内容部分 -->
+  <scroll-view class="content" enable-back-to-top scroll-y="true" scroll-with-animation="true" bindscroll="onPageScroll"> 
+    
+    <view class="item" wx:for="{{results}}" wx:if="{{results.length > 0}}" wx:for-item="result" wx:key="{{result._id}}" 
+      data-submenu='{{result}}' data-index='{{index}}' bindtap="selectOne" > 
+      
+      <view >{{index + 1}}.{{result.name}}</view> 
+      
+      <view wx:if="{{result.file == null}}"  class="image" style='width:{{sysWidth/6}}px'>
+        <image style='width:{{sysWidth/6}}px;height:{{sysWidth/6}}px' src='/images/search_none.png'></image>
+      </view> 
+      
+      <view wx:if="{{result.file}}"  class="image" style='width:{{sysWidth/6}}px'>
+        <image style='width:{{sysWidth/6}}px;height:{{sysWidth/6}}px' src='{{result.file}}'></image>
+      </view> 
+    </view>
+
+  </scroll-view> 
+
+
+  
+  <button class="defalut_btn img-plus-style"  bindtap="add">
+    <icon class="iconfont icon-add"></icon>
+  </button>
+  
+  
+  <!--弹窗 添加地点 -->
+  <view class="modal-mask" bindtap="hideModal"  catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+    <view class="modal-dialog" wx:if="{{showModal}}">
+      <view class="modal-title">二级菜单名称</view>
+      <view class="modal-content">
+        <view class="modal-input">
+          <input placeholder-class="input-holder" type="text" maxlength='11' class="input" placeholder="请输入二级菜单名称" id="submenu.name"  value="{{submenu.name}}" bindinput="inputValue"></input>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <view class="btn-cancel" bindtap="closeModal" data-status="cancel">取消</view>
+        <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
+    </view>
+  </view>

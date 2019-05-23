@@ -14,6 +14,12 @@ Page({
     that.init();
   },
 
+
+  goback() {
+    wx.navigateBack({ delta: 1 })
+  },
+
+  
   init(){
     wx.showLoading({
       title: '加载中',

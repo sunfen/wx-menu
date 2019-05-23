@@ -19,6 +19,12 @@ Page({
 
 
 
+  goback() {
+    wx.navigateBack({ delta: 1 })
+  },
+  
+
+
   /**
    * 输入框输入事件
    */

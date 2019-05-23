@@ -1,3 +1,5 @@
+<component-topnav inner-title="新增制作方法" is-show-back="true" bind:goback="goback"></component-topnav>
+
 <scroll-view>
   
   <view class="cover" style='width:{{sysWidth/4*3}}px'>
@@ -8,14 +10,20 @@
 
   <!-- 添加菜名 -->
 
-  <view class="name">
-    <input placeholder='菜名' maxlength='32' bindinput='inputValue' id="name"></input>
-  </view>
 
   <view class="type">
-    <picker range="{{menuTypes}}" value="menuTypeIndex" bindchange="typeChange">
-    分类: <text>{{menuTypeIndex}}</text>
+    <picker range="{{menus}}" value="menuIndex" bindchange="menuTypeChange">
+    分类: <text>{{menus[menuIndex].name}}</text>
     </picker>
+  </view>
+
+  <view class="name">
+    <picker range="{{menus}}" value="menuIndex" bindchange="menuTypeChange">
+      名称: <text>{{menus[menuIndex].name}}</text>
+    </picker>
+  </view>
+  <view class="section {{menusReply ? 'on':'off'}}">
+    <input placeholder='输入菜名如:  xxx奶茶' maxlength='32' bindinput='inputValue' id="name"></input>
   </view>
 
   <view class="type">

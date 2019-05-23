@@ -1,0 +1,63 @@
+.hh-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #181E2C;
+  z-index: 99999;
+}
+
+
+.hh-title{
+  font-size: 30rpx;
+  text-align: center;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.title-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+.hh-nav-right{
+  width: 40px;
+}
+
+
+@font-face {
+  font-family: 'iconfont';  /* project id 1175934 */
+  src: url('//at.alicdn.com/t/font_1175934_fjq0rek463d.eot');
+  src: url('//at.alicdn.com/t/font_1175934_fjq0rek463d.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1175934_fjq0rek463d.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1175934_fjq0rek463d.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1175934_fjq0rek463d.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1175934_fjq0rek463d.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 左返回 */
+.icon-back-left:before { content: "\e625";}
+
+
+/* 清楚按钮的默认样式  */
+.defalut_btn{
+  background: transparent;
+  border:none;
+  color: #fff;
+}
+
+
+.defalut_btn:after{
+  display: none;
+}

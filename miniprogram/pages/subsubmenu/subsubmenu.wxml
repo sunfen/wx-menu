@@ -1,8 +1,8 @@
-<component-topnav inner-title="我的店" is-show-back="true" bind:goback="goback"></component-topnav>
+<component-topnav inner-title="菜单类型管理" is-show-back="true" bind:goback="goback"></component-topnav>
 <!-- 左侧列表内容部分 -->
   <scroll-view class="content" enable-back-to-top scroll-y="true" scroll-with-animation="true" bindscroll="onPageScroll"> 
     
-    <view class="item" wx:for="{{results}}" wx:if="{{results.length > 0}}" wx:for-item="result" wx:key="{{result._id}}"  data-store='{{result}}' bindtap="selectOne"> 
+    <view class="item" wx:for="{{results}}" wx:if="{{results.length > 0}}" wx:for-item="result" wx:key="{{result._id}}"  data-menu='{{result}}' bindtap="selectOne"> 
       <view>{{index + 1}}.{{result.name}}</view> 
     </view> 
   </scroll-view> 
@@ -17,10 +17,10 @@
   <!--弹窗 添加地点 -->
   <view class="modal-mask" bindtap="hideModal"  catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
     <view class="modal-dialog" wx:if="{{showModal}}">
-      <view class="modal-title">店名</view>
+      <view class="modal-title">类型名称</view>
       <view class="modal-content">
         <view class="modal-input">
-          <input placeholder-class="input-holder" type="text" maxlength='11' class="input" placeholder="请输入店名" id="store.name"  value="{{store.name}}" bindinput="inputValue"></input>
+          <input placeholder-class="input-holder" type="text" maxlength='16' class="input" placeholder="请输入类型名称" id="subsubmenu.name"  value="{{subsubmenu.name}}" bindinput="inputValue"></input>
         </view>
       </view>
       <view class="modal-footer">

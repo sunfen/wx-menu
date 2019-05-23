@@ -1,214 +1,35 @@
+<component-topnav></component-topnav>
+
 <view class="aslide-menu">
 
   <scroll-view class="aslide-box" style='height:{{sysHeight}}px' scroll-y="true">
-    <view class="{{status==0 ? 'in' : ''}}" data-index="0" bindtap="changeMenu">黑泷经典</view>
-    <view class="{{status==1 ? 'in' : ''}}" data-index="1" bindtap="changeMenu">东方奶香</view>
-    <view class="{{status==2 ? 'in' : ''}}" data-index="2" bindtap="changeMenu">谷力谷奶</view>
-    <view class="{{status==3 ? 'in' : ''}}" data-index="3" bindtap="changeMenu">津味果饮</view>
-    <view class="{{status==4 ? 'in' : ''}}" data-index="4" bindtap="changeMenu">厚黑脏丸奶</view>
-    <view class="{{status==5 ? 'in' : ''}}" data-index="5" bindtap="changeMenu">特醇牛奶</view>
-    <view class="{{status==6 ? 'in' : ''}}" data-index="6" bindtap="changeMenu">甜品</view>
+    
+    <view wx:for="{{menus}}" wx:for-item="menu" wx:key="{{menu._id}}" data-submenu='{{menu}}' 
+    data-index='{{index}}'  class="{{status == index ? 'in' : ''}}" bindtap="changeMenu">
+
+      <view>{{menu.name}}</view>
+    </view>
+
   </scroll-view>
 
     <scroll-view  style='height:{{sysHeight}}px'  class="aslide-content" scroll-into-view="{{currentPosition}}" scroll-y="true" scroll-with-animation="true" bindscrolltolower="scrollBottom">
     
-      <view id="order0" class="aslide-item">
-        <text class="aslide-item-title">黑泷经典</text>
-        <view class="aslide-item-info">
-          <view class="aslide-item-img" data-src="/images/food1.jpg" bindtap="previewImages">
-            <image src="/images/food1.jpg"></image>
-          </view>
-          <view class="cart-info-container">
-            <text class="food-name">黑泷奶绿/珍奶</text>
-            <view class="cart-model">
-              <text bindtap="viewFood">小杯加饼</text>
-              <text bindtap="viewFood">中杯加热</text>
-              <text bindtap="viewFood">大杯</text>
-            </view>
-          </view>
-        </view>
-        <view class="aslide-item-info">
-          <view class="aslide-item-img" data-src="/images/food2.jpg" bindtap="previewImages">
-            <image src="/images/food2.jpg"></image>
-          </view>
-          <view class="cart-info-container">
-            <text class="food-name">椰果奶绿/奶茶</text>
-            <view class="cart-model">
-              <text>小杯</text>
-              <text>中杯</text>
-              <text>大杯</text>
-            </view>
-          </view>
-        </view>
-        <view class="aslide-item-info">
-          <view class="aslide-item-img" data-src="/images/food3.jpg" bindtap="previewImages">
-            <image src="/images/food3.jpg"></image>
-          </view>
-          <view class="cart-info-container">
-            <text class="food-name">布丁奶绿/奶</text>
-            <view class="cart-model">
-              <text>小杯</text>
-              <text>中杯</text>
-              <text>大杯</text>
-            </view>
-          </view>
-        </view>
-      </view>
+      <view class="aslide-item">
+        
+        <text class="aslide-item-title">{{currentMenu.name}}</text>
 
-      <view id="order1" class="aslide-item">
-        <text class="aslide-item-title">东方奶香</text>
-        <view class="aslide-item-info">
-          <view class="aslide-item-img" data-src="/images/food4.png" bindtap="previewImages">
-            <image src="/images/food4.png"></image>
+        <view class="aslide-item-info"  wx:for="{{currentMenu.submenus}}" wx:for-item="submenu" wx:key="{{submenu._id}}" data-submenu='{{submenu}}' data-index='{{index}}'   id="{{'order'+index}}" >
+          <view class="aslide-item-img" data-src="{{submenu.file ? submenu.file : noImage}}" bindtap="previewImages">
+            <image src="{{submenu.file ? submenu.file : noImage}}"></image>
           </view>
           <view class="cart-info-container">
-            <text class="food-name">炭火观音奶茶</text>
+            <text class="food-name">{{submenu.name}}</text>
             <view class="cart-model">
-              <text>小杯</text>
-              <text>中杯</text>
-              <text>大杯</text>
+              <text bindtap="viewFood" wx:for="{{submenu.subsubmenus}}" wx:for-item="subsubmenu" wx:key="{{subsubmenu._id}}" data-submenu='{{subsubmenu}}' data-index='{{index1}}'>小杯加饼</text>
             </view>
           </view>
         </view>
-        <view class="aslide-item-info">
-          <view class="aslide-item-img">
-            <image src="/images/food1.jpg"></image>
-          </view>
-          <view class="cart-info-container">
-            <text class="food-name">红豆布丁烤奶</text>
-            <view class="cart-model">
-              <text>小杯</text>
-              <text>中杯</text>
-              <text>大杯</text>
-            </view>
-          </view>
-        </view>
-        <view class="aslide-item-info">
-          <view class="aslide-item-img">
-            <image src="/images/food2.jpg"></image>
-          </view>
-          <view class="cart-info-container">
-            <text class="food-name">北海道布丁奶</text>
-            <view class="cart-model">
-              <text>小杯</text>
-              <text>中杯</text>
-              <text>大杯</text>
-            </view>
-          </view>
-        </view>
-      </view>
 
-
-
-      <view id="order2" class="aslide-item">
-        <text class="aslide-item-title">谷力谷奶</text>
-        <view class="aslide-item-info">
-          <view class="aslide-item-img">
-            <image src="/images/food3.jpg"></image>
-          </view>
-          <view class="cart-info-container">
-            <text class="food-name">芋见抹茶奶</text>
-            <view class="cart-model">
-              <text>小杯</text>
-              <text>中杯</text>
-              <text>大杯</text>
-            </view>
-          </view>
-        </view>
-      </view>
-
-
-      <view id="order3" class="aslide-item">
-        <text class="aslide-item-title">津味果饮</text>
-        <view class="aslide-item-info">
-          <view class="aslide-item-img">
-            <image src="/images/food4.png"></image>
-          </view>
-          <view class="cart-info-container">
-            <text class="food-name">金桔蜜柚</text>
-            <view class="cart-model">
-              <text>小杯</text>
-              <text>中杯</text>
-              <text>大杯</text>
-            </view>
-          </view>
-        </view>
-        <view class="aslide-item-info">
-          <view class="aslide-item-img">
-            <image src="/images/food1.jpg"></image>
-          </view>
-          <view class="cart-info-container">
-            <text class="food-name">梨上花开 （雪梨）</text>
-            <view class="cart-model">
-              <text>小杯</text>
-              <text>中杯</text>
-              <text>大杯</text>
-            </view>
-          </view>
-        </view>
-        <view class="aslide-item-info">
-          <view class="aslide-item-img">
-            <image src="/images/food2.jpg"></image>
-          </view>
-          <view class="cart-info-container">
-            <text class="food-name">梨不开你 （凤梨）</text>
-            <view class="cart-model">
-              <text>小杯</text>
-              <text>中杯</text>
-              <text>大杯</text>
-            </view>
-          </view>
-        </view>
-        <view class="aslide-item-info">
-          <view class="aslide-item-img">
-            <image src="/images/food3.jpg"></image>
-          </view>
-          <view class="cart-info-container">
-            <text class="food-name">金桔柠檬</text>
-            <view class="cart-model">
-              <text>小杯</text>
-              <text>中杯</text>
-              <text>大杯</text>
-            </view>
-          </view>
-        </view>
-      </view>
-
-      <view id="order4" class="aslide-item">
-        <text class="aslide-item-title">厚黑脏丸奶</text>
-        <view class="aslide-item-info">
-          <view class="aslide-item-img">
-            <image src="/images/search_none.png"></image>
-          </view>
-          <view class="cart-info-container">
-             <text class="food-name">暂无</text>
-          </view>
-        </view>
-      </view>
-
-      <view id="order5" class="aslide-item">
-        <text class="aslide-item-title">特醇牛奶</text>
-        <view class="aslide-item-info">
-          <view class="aslide-item-img">
-            <image src="/images/search_none.png"></image>
-          </view>
-          <view class="cart-info-container">
-            <text class="food-name">暂无</text>
-          </view>
-        </view>
-      </view>
-
-
-      <view id="order6" class="aslide-item">
-        <text class="aslide-item-title">甜品</text>
-        <view class="aslide-item-info">
-          <view class="aslide-item-img">
-            <image src="/images/search_none.png"></image>
-          </view>
-          <view class="cart-info-container">
-            <text class="food-name">暂无</text>
-          </view>
-        </view>
       </view>
 
     </scroll-view>

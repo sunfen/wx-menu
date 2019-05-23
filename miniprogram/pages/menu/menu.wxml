@@ -1,3 +1,4 @@
+<component-topnav inner-title="一级菜单管理" is-show-back="true" bind:goback="goback"></component-topnav>
 <!-- 左侧列表内容部分 -->
   <scroll-view class="content" enable-back-to-top scroll-y="true" scroll-with-animation="true" bindscroll="onPageScroll"> 
     

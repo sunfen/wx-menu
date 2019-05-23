@@ -1,0 +1,31 @@
+/* pages/list/list.wxss */
+page{
+  height: 100%;
+} 
+
+.item{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  background: #fff;
+  padding: 10px;
+}
+
+.icon-add {
+  font-size:56px;
+  color:  #F6ACAC;
+}
+
+
+
+.image{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.icon-add2{
+  color: rgb(121, 120, 120);
+}
