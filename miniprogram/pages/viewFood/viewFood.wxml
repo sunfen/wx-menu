@@ -1,80 +1,60 @@
 <component-topnav inner-title="查看制作方法" is-show-back="true" bind:goback="goback"></component-topnav>
+
+
+
 <scroll-view>
-  
-  <view class="cover" style='width:{{sysWidth/4*3}}px'>
-    <image style='width:{{sysWidth/4*3}}px' src='{{cover.tempFilePaths}}'></image>
-    <button class="defalut_btn" bindtap='addCover'>
-      <icon class="iconfont icon-add2"></icon>    上传封面</button>
-  </view>
-
-  <!-- 添加菜名 -->
-
-  <view class="name">
-    <input placeholder='菜名' maxlength='32' bindinput='inputValue' id="name"></input>
-  </view>
-
-  <view class="type">
-    <picker range="{{menuTypes}}" value="menuTypeIndex" bindchange="typeChange">
-    分类: <text>{{menuTypeIndex}}</text>
-    </picker>
-  </view>
-
-  <view class="type">
-    标签:<input placeholder='输入标签如：大杯加冰' maxlength='32' bindinput='inputValue' id="type"></input>
-  </view>
 
   <view class="type">
     
     <view class="type-header">
-      <text>添加食材</text>
-      <text class="type-header clear" bindtap='clearFoods'>清空</text>
+      <text>食材</text>
     </view>   
 
-    <view class="addType" wx:for="{{foods}}" wx:key="property" wx:for-item="item" wx:for-index="index"  data-index="{{index}}">
-      <input placeholder='食材:如五花肉' maxlength='32'></input>
-      <input placeholder='用量:如250克' maxlength='32'></input>
-      <icon class="iconfont icon-delete" data-index="{{index}}" bindtap='removeFoods'></icon>
+    <view class="type-content" wx:for="{{method.foods}}" wx:key="property" wx:for-item="item" wx:for-index="index"  data-index="{{index}}">
+      <text>{{index+1}}. {{item.foodtext}}</text>
+      <text>{{item.weight}}</text>
     </view>
-    <view class="addType-add" bindtap="addFoods" >再添加一种食材</view>
   </view>
 
 
   <view class="step">
     <view class="type-header">
       <text>操作步骤</text>
-      <text class="type-header clear" bindtap='clearSteps'>清空</text>
     </view> 
 
-    <view wx:for="{{steps}}" wx:key="property" wx:for-item="item" wx:for-index="index"  data-index="{{index}}">
-      <view class="addType" >
-        <text>第{{index+1}}步</text>
-        <icon class="iconfont icon-delete" data-index="{{index}}"  bindtap='removeSteps'></icon>
+    <view wx:for="{{method.steps}}" wx:key="property" wx:for-item="item" wx:for-index="index"  data-index="{{index}}">
+      
+      <view class="step-number">
+        <text >第{{index+1}}步</text>
       </view>
       
-      <view class="stepImage"  wx:if="{{item.images.length >= 0  && item.images.length <= 2}}" >
-        <button class="defalut_btn" data-index="{{index}}"  bindtap='addStepImages'>
-          <icon class="iconfont icon-add2"></icon>    上传步骤图</button>
-      </view>
-
       <view class="image-column">
         <view class="image-row">
-          <view style="width:{{sysWidth/3}}rpx;height:{{sysWidth/3}}rpx" class="image" wx:for="{{item.images}}" wx:key="property" wx:for-item="item1" wx:for-index="id" data-index="{{id}}" bindlongtap='handleLongPress' bindtouchstart="touchstart" bindtouchmove="touchmove"  bindtap='clickHandle'>
-            <image  style="width:{{sysWidth/3}}rpx;height:{{sysWidth/3}}rpx" src='{{item1.path}}'  data-src='{{item.path}}' data-srcs='{{item.images}}'></image>
+          <view class="image" wx:for="{{item.files}}" wx:key="property" wx:for-item="item1" wx:for-index="id" data-index="{{id}}" bindtap='previewImage'>
+            <image  style="width:{{sysWidth/3*4}}rpx;height:{{sysWidth/3*4}}rpx" src='{{item1}}' data-src='{{item1}}' data-srcs='{{item.files}}'></image>
           </view>
         </view>
       </view>
 
-      <textarea  maxlength='512' placeholder='步骤描述'></textarea>
+      <view class="type-header">
+        <text>详细描述</text>
+      </view>
+      
+      <text>{{item.description}}</text>
+
     </view>
-    <view class="addStep-add" bindtap="addSteps">添加一步</view>
   </view>
 
   <view class="remark">
-    <text>小贴士</text>
-    <textarea  maxlength='512' placeholder='添加小提示,最多512个字...' bindinput='inputValue' id="remark"></textarea>
+    <view class="type-header">
+      <text>小贴士</text>
+    </view>
+    <text>{{method.remark}}</text>
   </view>
 
-  <view class="save">
-    <button type="primary">保存</button>
+  <view class="save" wx:if="{{method}}">
+    <button type="warn" bindtap='onDelete'>删除</button>
+    <button type="primary" bindtap='edit'>修改</button>
   </view>
+
 </scroll-view>

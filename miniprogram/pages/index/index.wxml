@@ -24,8 +24,8 @@
           </view>
           <view class="cart-info-container">
             <text class="food-name">{{submenu.name}}</text>
-            <view class="cart-model">
-              <text bindtap="viewFood" wx:for="{{submenu.subsubmenus}}" wx:for-item="subsubmenu" wx:key="{{subsubmenu._id}}" data-submenu='{{subsubmenu}}' data-index='{{index1}}'>小杯加饼</text>
+            <view class="cart-model" >
+              <text wx:for="{{submenu.subsubmenus}}" wx:for-item="subsubmenu" wx:key="{{subsubmenu._id}}" bindtap="viewFood"  data-submenu='{{subsubmenu}}' data-index='{{index1}}'>{{subsubmenu.name}}</text>
             </view>
           </view>
         </view>

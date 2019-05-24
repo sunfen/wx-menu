@@ -2,7 +2,7 @@
 <!-- 左侧列表内容部分 -->
   <scroll-view class="content" enable-back-to-top scroll-y="true" scroll-with-animation="true" bindscroll="onPageScroll"> 
     
-    <view class="item" wx:for="{{results}}" wx:if="{{results.length > 0}}" wx:for-item="result" wx:key="{{result._id}}"  data-menu='{{result}}' bindtap="selectOne"> 
+    <view class="item" wx:for="{{results}}" wx:if="{{results.length > 0}}" wx:for-item="result" wx:key="{{result._id}}"  data-subsubmenu='{{result}}' bindtap="selectOne"> 
       <view>{{index + 1}}.{{result.name}}</view> 
     </view> 
   </scroll-view> 

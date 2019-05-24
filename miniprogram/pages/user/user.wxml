@@ -38,7 +38,7 @@
       <icon class="iconfont icon-invitation"></icon> 邀请店员</button>
   </view>
   
-  <view class="sub_order_content">
+  <view class="sub_order_content" bindtap="share">
     <view class="sub_order_img z">
       <image src="/images/food1.jpg"></image>
     </view>

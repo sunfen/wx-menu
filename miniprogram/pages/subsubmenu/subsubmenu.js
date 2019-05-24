@@ -51,10 +51,11 @@ Page({
   selectOne(e) {
     var that = this;
     wx.showActionSheet({
-      itemList:['查看类型' ,'编辑', '删除'],
+      itemList:['制作方法' ,'编辑', '删除'],
       success(res) {
         if (res.tapIndex == 0) {
-          that.viewSubSubMenus(e.currentTarget.dataset.subsubmenu);
+        
+          that.make(e.currentTarget.dataset.subsubmenu);
         }else if (res.tapIndex == 1){
           that.edit(e.currentTarget.dataset.subsubmenu);
         }else  if (res.tapIndex == 2) {
@@ -66,11 +67,33 @@ Page({
 
 
   /**
-   * 查看标签
+   * 制作方法
    */
-  viewSubSubMenus(item) {
+  make(item) {
     var that = this;
-   
+    that.setData({ subsubmenu: item });
+    db.collection("methods").where({
+      _openid: that.data.openid,
+      subsubmenu_id: that.data.subsubmenu._id
+    }).get({
+
+      success: result => {
+        if(result.data && result.data.length > 0 ){
+          var object = JSON.stringify(result.data[0]);
+          wx.navigateTo({
+            url: '/pages/viewFood/viewFood?method=' + object,
+          })
+        }else{
+          var object = JSON.stringify(item);
+          wx.navigateTo({
+            url: '/pages/addFood/addFood?subsubmenu=' + object,
+          })
+        }
+        
+      }, fail: err => {
+        console.log(err);
+      }
+    })
   },
 
   /**

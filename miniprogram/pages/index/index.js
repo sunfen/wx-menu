@@ -11,7 +11,6 @@ Page({
     status: 0,
     currentPosition: "order0",
     sysHeight: app.globalData.sysHeight,
-    submenus:[],
     menus:[]
   },
 
@@ -25,7 +24,6 @@ Page({
     var menus = wx.getStorageSync("menus");
     
     that.setData({openid: openid, store: store, menus: menus});
-    console.log(that.data);
 
     if (menus && menus.length > 0){
       that.setData({ currentMenu: menus[0] });
@@ -43,28 +41,40 @@ Page({
       menu_id: that.data.currentMenu._id
     }).get({
       success: result => {
+
         that.data.menus[index].submenus = result.data ;
         that.setData({ ['currentMenu.submenus']: result.data, menus: that.data.menus});
 
-        for (var i = 0; i < that.data.menus[index].submenus.length; i++) {
-          db.collection("subsubmenus").where({
-            _openid: that.data.openid,
-            submenu_id: that.data.menus[index].submenus[i]._id
-          }).get({
-
-            success: result => {
-              that.data.menus[index].submenus[i].subsubmenus = result.data;
-              that.setData({ ['currentMenu.submenus']: that.data.menus[index].submenus, menus: that.data.menus });
-              wx.hideLoading();
-
-            }, fail: err => {
-              wx.hideLoading();
-            }
-          })
+        if (result.data && result.data.length > 0){
+            that.getSubsubmenus(index, 0);
         }
         wx.hideLoading();
       }, fail: err => {
         console.log(err);
+        wx.hideLoading();
+      }
+    })
+  },
+
+  getSubsubmenus(index, index1){
+    var that = this;
+    db.collection("subsubmenus").where({
+      _openid: that.data.openid,
+      submenu_id: that.data.menus[index].submenus[index1]._id
+   
+    }).get({
+
+      success: result1 => {
+        that.data.menus[index].submenus[index1].subsubmenus = result1.data;
+      
+        that.setData({ ['currentMenu.submenus']: that.data.menus[index].submenus, menus: that.data.menus });
+        if (that.data.menus[index].submenus.length-1 != index1){
+          that.getSubsubmenus(index, index1+1);
+        }else{
+          wx.hideLoading();
+        }
+        
+      }, fail: err => {
         wx.hideLoading();
       }
     })
@@ -96,9 +106,9 @@ Page({
 
  
   
-  viewFood(){
+  viewFood(e){
     wx.navigateTo({
-      url: '/pages/viewFood/viewFood',
+      url: '/pages/viewFood/viewFood?id=' + e.target.dataset.submenu._id,
     })
   },
 

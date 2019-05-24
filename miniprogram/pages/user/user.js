@@ -14,11 +14,14 @@ Page({
     store: {}
   },
 
-  onShow: function (options) {
+  onLoad: function (options) {
     var that = this;
     var userInfo = wx.getStorageSync("userInfo");
     var stores = wx.getStorageSync("stores");
     var store = wx.getStorageSync("store");
+    console.log(store);
+    console.log(userInfo);
+    console.log(stores);
     that.setData({
       userInfo: userInfo,
       stores: stores,
@@ -66,25 +69,31 @@ Page({
    * 进行页面分享
    */
   onShareAppMessage: function (options) {
-    console.log(options)
+    console.log(Date.now());
     var that = this;
     if (!that.data.store || !that.data.store._id){
       common.showAlertToast('请选择当前使用的店');
       return;
-    }
-    if (options.from === 'button') {
-      // 来自页面内转发按钮
-      return {
+    }else{
+      return ({
         title: that.data.store.name + '邀请你加入本店!',
-        path: 'pages/share/share?store_id=' + that.data.store._id,
+        path: '/pages/share/share?store_id=' + that.data.store._id + "&time=" + Date.now(),
+        imageUrl: '/images/1.jpg',
         success: function (res) {
+          console.log(res);
+          var shareTickets = res.shareTickets;
+          if (shareTickets.length == 0) {
+            return false;
+          }
           common.showAlertToast('发送成功');
         },
         fail: function () {
           common.showAlertToast('转发失败...');
         }
-      }
+      })
     }
+
+    
   },
 
 

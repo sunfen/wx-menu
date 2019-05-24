@@ -2,177 +2,66 @@
 const app = getApp()
 var common = require('/../../pages/common/common.js');
 const db = wx.cloud.database();
+
+
 Page({
   data: {
-    results: [],
     showModal: false,
-    store: null,
-    menu:{}
   },
 
-  onLoad(){
+  onLoad(options){
     var that = this;
-    var store = wx.getStorageSync("store");
-    that.setData({ store: store });
-    var openid = wx.getStorageSync("openid");
-    that.setData({ openid: openid });
-    that.init();
-  },
-  
-  
-  onShow(options) {
-    console.log(options);
-  },
-
-
-  init(){
-    wx.showLoading({
-      title: '加载中',
-    })
-    var that = this;
-    db.collection("menus").where({
-      _openid: that.data.openid,
-      store_id: that.data.store._id
-    }).get({
-      success: result => {
-        that.setData({ results: result.data });
-        wx.setStorageSync("menus", result.data);
-        wx.hideLoading();
-      }, fail: err => {
-        console.log(err);
-        wx.hideLoading();
-      }
-    })
-  },
-
-  selectOne(e) {
-    var that = this;
-    wx.showActionSheet({
-      itemList: ['编辑', '删除'],
-      success(res) {
-        if (res.tapIndex == 0) {
-          that.edit(e.currentTarget.dataset.menu);
-        } else if (res.tapIndex == 1) {
-          that.onDel(e.currentTarget.dataset.menu);
-        }
-      }
-    })
-  },
-
-  /**
-   * 编辑
-   */
-  edit(item) {
-    var that = this;
-    that.setData({ showModal: true, menu: item });
-  },
-
-  /**
-   * 新增
-   */
-  add(){
-    var that = this;
-    that.setData({ showModal: true, menu: {} });
-  },
-
-
-  // 关闭详情页
-  closeModal: function () {
-    this.setData({
-      showModal: false
-    })
-  },
-
-  /**
-   * 输入框输入事件
-   */
-  inputValue: function (e) {
-    var name = e.target.id;
-    this.setData({
-      [name]: e.detail.value
-    })
-  },
-
-
-  //新增完
-  /**
-   * 对话框确认
-   */
-  onConfirm: function (e) {
-    var that = this;
-
-    if (that.data.menu.name == "" || that.data.menu.name == undefined) {
-      common.showAlertToast("请填写名称！");
+    console.log(options.store_id);
+    if (!options.store_id || !options.time){
+      common.showAlertToast('请联系店长邀请你入店！');
       return;
     }
 
-    that.setData({
-      showModal: false
-    })
-
-    if (that.data.menu._id) {
-      that.onUpdate();
-    } else {
-      that.onCreate();
+    if ((Date.now() - options.time) > 100000000) {
+      common.showAlertToast('链接已经过期！ 请联系店长邀请你入店！');
+      return;
     }
-  },
+    var userid = wx.getStorageSync("userid");
+    if (!userid){
+      wx.cloud.callFunction({
+        // 需调用的云函数名
+        name: 'login',
+        // 成功回调
+        complete: res => {
+          wx.setStorageSync("openid", res.result.openid);
+          app.globalData.openid = res.result.openid;
 
-  onCreate(){
-    var that = this;
-    db.collection("menus").add({
-      data: {
-        store_id: that.data.store._id,
-        name: that.data.menu.name,
-      }, success: res => {
-        wx.showToast({
-          title: '新增成功！',
-          icon: 'success',
-          success(res) {
-            that.init();
-          }
-        })
-        that.setData({ menu: {} });
-      }, fail: err => {
-        that.setData({ menu: {} });
-        if (err.errCode == -502001) {
-
-          common.showAlertToast("该店名已经存在，请重新命名！");
-        } else {
-
-          common.showAlertToast("数据错误，请重试！");
+          db.collection("users").where({
+            _openid: app.globalData.openid
+          }).get({
+            success: result => {
+              if (result.data.length == 0) {
+                db.collection("users").add({
+                  data: {
+                    openid: app.globalData.openid
+                  }, success: res => {
+                    wx.setStorageSync("userid", res._id);
+                    that.setData({ userid: res._id });
+                  }
+                })
+              } else {
+                wx.setStorageSync("userid", result.data[0]._id);
+                that.setData({ userid: result.data[0]._id});
+              }
+            }, fail: err => {
+              console.log(err)
+            }
+          })
         }
-      }
-    })
+      })
+    }
+    that.setData({storeId: options.store_id});
+
+
   },
-
-
-
-  onUpdate() {
-    var that = this;
-    db.collection("menus").doc(that.data.menu._id).update({
-      data: {
-        name: that.data.menu.name,
-      }, success: res => {
-        wx.showToast({
-          title: '更新成功！',
-          icon: 'success',
-          success(res) {
-            that.init();
-          }
-        })
-        that.setData({ menu: {} });
-      }, fail: err => {
-        that.setData({ menu: {} });
-        if (err.errCode == -502001) {
-
-          common.showAlertToast("该店名已经存在，请重新命名！");
-        } else {
-
-          common.showAlertToast("数据错误，请重试！");
-        }
-      }
-    })
-  },
+  
+  
+  
 
 
 

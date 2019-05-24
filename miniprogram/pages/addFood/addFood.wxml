@@ -1,33 +1,42 @@
-<component-topnav inner-title="新增制作方法" is-show-back="true" bind:goback="goback"></component-topnav>
+<component-topnav inner-title="新增制作方法" is-show-back="{{isFromSub}}" bind:goback="goback"></component-topnav>
 
 <scroll-view>
   
-  <view class="cover" style='width:{{sysWidth/4*3}}px'>
-    <image style='width:{{sysWidth/4*3}}px' src='{{cover.tempFilePaths}}'></image>
-    <button class="defalut_btn" bindtap='addCover'>
-      <icon class="iconfont icon-add2"></icon>    上传封面</button>
-  </view>
 
   <!-- 添加菜名 -->
+  <view class="type" wx:if="{{!isFromSub}}">
+    <view bindtap="changeType" class="pickerview" >
+      <text class="pickertitle" >选择种类 ：</text>
+      <text>{{currentmenu.name}} - {{currentsubmenu.name}} - {{currentsubsubmenu.name}}</text>
+    </view>
 
-
-  <view class="type">
-    <picker range="{{menus}}" value="menuIndex" bindchange="menuTypeChange">
-    分类: <text>{{menus[menuIndex].name}}</text>
-    </picker>
-  </view>
-
-  <view class="name">
-    <picker range="{{menus}}" value="menuIndex" bindchange="menuTypeChange">
-      名称: <text>{{menus[menuIndex].name}}</text>
-    </picker>
-  </view>
-  <view class="section {{menusReply ? 'on':'off'}}">
-    <input placeholder='输入菜名如:  xxx奶茶' maxlength='32' bindinput='inputValue' id="name"></input>
-  </view>
-
-  <view class="type">
-    标签:<input placeholder='输入标签如：大杯加冰' maxlength='32' bindinput='inputValue' id="type"></input>
+    <view class="modal-mask" bindtap="hideModal"  catchtouchmove="preventTouchMove" wx:if="{{showPicker}}"></view>
+      <view class="modal-picker" wx:if="{{showPicker}}">
+      <view class="modal-title">
+        <text>菜单列表</text>
+        <view><button size="mini" type="primary" bindtap='surepicker'>确定</button></view>
+      </view>
+      <view class="modal-content">
+        <picker-view indicator-style="height: 50px;" value="{{menuIndexs}}"  bindchange="menuTypeChange">
+        
+          <picker-view-column>
+            <view wx:for="{{menus}}" wx:key="property" wx:for-item="item" data-index="{{index}}" value="{{menuIndex}}">
+              {{item.name}}
+            </view>
+          </picker-view-column>
+          <picker-view-column>
+            <view wx:for="{{menus[menuIndexs[0]].submenus}}" wx:key="property" wx:for-item="item" data-index="{{index}}" value="{{submenuIndex}}">
+              {{item.name}}
+            </view>
+          </picker-view-column>
+          <picker-view-column>
+            <view wx:for="{{menus[menuIndexs[0]].submenus[menuIndexs[1]].subsubmenus}}" wx:key="property" wx:for-item="item" data-index="{{index}}" value="{{subsubmenuIndex}}">
+              {{item.name}}
+            </view>
+          </picker-view-column>
+        </picker-view>
+      </view>
+    </view>
   </view>
 
   <view class="type">
@@ -37,12 +46,12 @@
       <text class="type-header clear" bindtap='clearFoods'>清空</text>
     </view>   
 
-    <view class="addType" wx:for="{{foods}}" wx:key="property" wx:for-item="item" wx:for-index="index"  data-index="{{index}}">
-      <input placeholder='食材:如五花肉' maxlength='32'></input>
-      <input placeholder='用量:如250克' maxlength='32'></input>
+    <view class="addType" wx:for="{{method.foods}}" wx:key="property" wx:for-item="item" wx:for-index="index" >
+      <input placeholder='食材:如五花肉' value="{{method.foods[index].foodtext}}" maxlength='64' data-index="{{index}}" bindinput='foodtextChange'></input>
+      <input placeholder='用量:如250克' value="{{method.foods[index].weight}}" maxlength='64' data-index="{{index}}" bindinput='weightChange'></input>
       <icon class="iconfont icon-delete" data-index="{{index}}" bindtap='removeFoods'></icon>
     </view>
-    <view class="addType-add" bindtap="addFoods" >再添加一种食材</view>
+    <view class="addType-add" bindtap="addFoods">再添加一种食材</view>
   </view>
 
 
@@ -52,7 +61,7 @@
       <text class="type-header clear" bindtap='clearSteps'>清空</text>
     </view> 
 
-    <view wx:for="{{steps}}" wx:key="property" wx:for-item="item" wx:for-index="index"  data-index="{{index}}">
+    <view wx:for="{{method.steps}}" wx:key="property" wx:for-item="item" wx:for-index="index"  data-index="{{index}}">
       <view class="addType" >
         <text>第{{index+1}}步</text>
         <icon class="iconfont icon-delete" data-index="{{index}}"  bindtap='removeSteps'></icon>
@@ -66,25 +75,28 @@
       <view class="image-column">
         <view class="image-row">
           <view style="width:{{sysWidth/3}}rpx;height:{{sysWidth/3}}rpx" class="image" wx:for="{{item.images}}" wx:key="property" wx:for-item="item1" wx:for-index="id" data-index="{{id}}" bindlongtap='handleLongPress' bindtouchstart="touchstart" bindtouchmove="touchmove"  bindtap='clickHandle'>
-            <image  style="width:{{sysWidth/3}}rpx;height:{{sysWidth/3}}rpx" src='{{item1.path}}'  data-src='{{item.path}}' data-srcs='{{item.images}}'></image>
+            <image  style="width:{{sysWidth/3}}rpx;height:{{sysWidth/3}}rpx" src='{{item1.path ? item1.path : item1}}'  data-src='{{item1.path ? item1.path : item1}}' data-srcs='{{item.images}}'></image>
           </view>
         </view>
       </view>
 
-      <textarea  maxlength='512' placeholder='步骤描述'></textarea>
+      <textarea class="textarea" maxlength='512' placeholder='步骤描述' data-index="{{index}}"  bindinput='descriptionChange'  value="{{item.description}}"></textarea>
     </view>
     <view class="addStep-add" bindtap="addSteps">添加一步</view>
   </view>
 
+
+
   <view class="remark">
     <text>小贴士</text>
-    <textarea  maxlength='512' placeholder='添加小提示,最多512个字...' bindinput='inputValue' id="remark"></textarea>
+    <textarea class="textarea" maxlength='512'fixed="true" placeholder='添加小提示,最多512个字...' bindinput='inputValue' id="method.remark" value="{{method.remark}}"></textarea>
+    
   </view>
 
   <view class="save">
-    <button type="primary">保存</button>
+    <button type="primary" bindtap="save">保存</button>
   </view>
 </scroll-view>
 
 
-<component-footer current="1"></component-footer>
+<component-footer current="1"  wx:if="{{!isFromSub}}"></component-footer>

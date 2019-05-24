@@ -3,9 +3,7 @@ App({
   onLaunch: function () {
     //调用API从本地缓存中获取数据
     var that=this;  
-    that.getUserInfo(function(userInfo){ 
-      that.globalData.userInfo=userInfo
-    }); 
+
 
     const updateManager = wx.getUpdateManager();
 
@@ -26,6 +24,14 @@ App({
       })
     })
 
+    wx.cloud.init({
+      env: 'menu-uhbvh'
+    })
+
+    that.getUserInfo(function (userInfo) {
+      that.globalData.userInfo = userInfo
+    }); 
+
     wx.getSystemInfo({
       success: function (res) {
         that.globalData.platform = res.platform
@@ -42,12 +48,9 @@ App({
         that.globalData.statusBarHeight = 0
         that.globalData.titleBarHeight = 0
       }
-    }),
+    });
 
 
-    wx.cloud.init({
-      env: 'menu-uhbvh'
-    })
     const db = wx.cloud.database();
 
     wx.cloud.callFunction({
@@ -57,6 +60,7 @@ App({
       complete : res => {
         wx.setStorageSync("openid", res.result.openid);
         that.globalData.openid = res.result.openid;
+
         db.collection("users").where({
           _openid: that.globalData.openid
         }).get({
@@ -76,16 +80,16 @@ App({
             console.log(err)
           }
         })
+
         var store = wx.getStorageSync("store");
         if(!store){
           db.collection("stores").where({
             _openid: that.globalData.openid
           }).get({
-            success: result => {
-              that.globalData.stores = result.data;
-              wx.setStorageSync("stores", result.data);
+            success: result1 => {
+              that.globalData.stores = result1.data;
+              wx.setStorageSync("stores", result1.data);
               if(result.data.length > 0){
-                wx.setStorageSync({ "store": result.data[0] });
               }
             }, fail: err => {
               console.log(err)

@@ -2,15 +2,7 @@ scroll-view{
   font-size: 16px;
 }
 
-.cover{
-  display: flex;
-  margin: 30px;
-  justify-content: center;
-  flex-direction: column;
-  border: 3rpx dotted  rgb(71, 71, 71);
-  height: 200px;
-  width: 250px;
-}
+
 
 .icon-add2{
   color: rgb(121, 120, 120);
@@ -21,18 +13,32 @@ scroll-view{
   padding-bottom: 12rpx;
   border-bottom: 1rpx solid rgb(146, 146, 146);
 }
+
+
 .section{
    font-size:28rpx;
    margin-left: 50rpx;
    margin-top: 30rpx;
   }
-  .on{display: block}
-  .off{display: none}
+.on{display: block}
+.off{display: none}
+
 
 .type{
   margin: 30px;
   padding-bottom: 12rpx;
   border-bottom: 1rpx solid rgb(146, 146, 146);
+}
+
+.pickerview{
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pickertitle{
+   font-size: 16px;
+   font-weight: 600
 }
 
 .addType{
@@ -89,12 +95,12 @@ scroll-view{
   margin-bottom: 10px;
 }
 
-textarea{
+.textarea{
   padding: 5px;
   font-size: 12px;
   line-height: 200%;
-  /* height: 300px; */
   min-height: 30px;
+  width:90%
 }
 
 
@@ -133,4 +139,43 @@ textarea{
 
 .image{
   padding: 2px;
+}
+
+
+picker-view-column view{
+  line-height: 50px;
+}
+
+picker-view{
+  width: 100%;
+  height: 300px;
+}
+
+
+
+.modal-picker {
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  left: 0;
+  z-index: 9999;
+  background: #f9f9f9;
+  border-radius: 36rpx;
+}
+
+
+.modal-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20rpx;
+  font-size: 36rpx;
+  color: #030303;
+  text-align: center;
+}
+
+
+.modal-content {
+  
+  padding: 20rpx 12rpx;
 }

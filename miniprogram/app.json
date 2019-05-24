@@ -2,13 +2,14 @@
   "cloud": true,
   "pages": [
     "pages/index/index",
-    "pages/submenu/submenu",
     "pages/user/user",
-    "pages/addFood/addFood",
     "pages/viewFood/viewFood",
+    "pages/addFood/addFood",
+    "pages/submenu/submenu",
     "pages/menu/menu",
     "pages/subsubmenu/subsubmenu",
-    "pages/stores/stores"
+    "pages/stores/stores",
+    "pages/share/share"
   ],
   "window": {
     "backgroundTextStyle": "dark",
